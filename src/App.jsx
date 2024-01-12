@@ -1,37 +1,14 @@
-// App.jsx
-import React, { useState } from 'react';
-import Autocomplete from 'react-google-autocomplete';
-import './App.css'; // Make sure to create this CSS file
+import { Route, Routes } from 'react-router-dom';
+import Home from './Home';
+import Prediction from './Prediction';
 
-const App = () => {
-  const [selectedAddress, setSelectedAddress] = useState('');
-
-  const handlePlaceSelect = (place) => {
-    setSelectedAddress(place.formatted_address);
-  };
-
-  const handlePredictClick = () => {
-    // Add your logic for sunset prediction here using the selected address
-    console.log('Predict sunset for:', selectedAddress);
-  };
-
+function App() {
   return (
-    <div className="app-container">
-      <h1 className="title">Sunset Predictor</h1>
-      <div className="text-container">
-        <label htmlFor="location">Enter Location:</label>
-      </div>
-      <div className="input-container">
-        <Autocomplete
-          apiKey="AIzaSyDouikKeLOyhETHplgUVhcTpHMlcps3jwk"
-          onPlaceSelected={handlePlaceSelect}
-          types={['geocode']}
-          placeholder="Start typing your address..."
-        />
-        <button onClick={handlePredictClick}>Predict</button>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/prediction" element={<Prediction />} />
+    </Routes>
   );
-};
+}
 
 export default App;
