@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.jsx
+import React, { useState } from 'react';
+import Autocomplete from 'react-google-autocomplete';
+import './App.css'; // Make sure to create this CSS file
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [selectedAddress, setSelectedAddress] = useState('');
+
+  const handlePlaceSelect = (place) => {
+    setSelectedAddress(place.formatted_address);
+  };
+
+  const handlePredictClick = () => {
+    // Add your logic for sunset prediction here using the selected address
+    console.log('Predict sunset for:', selectedAddress);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app-container">
+      <h1 className="title">Sunset Predictor</h1>
+      <div className="text-container">
+        <label htmlFor="location">Enter Location:</label>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="input-container">
+        <Autocomplete
+          apiKey="AIzaSyDouikKeLOyhETHplgUVhcTpHMlcps3jwk"
+          onPlaceSelected={handlePlaceSelect}
+          types={['geocode']}
+          placeholder="Start typing your address..."
+        />
+        <button onClick={handlePredictClick}>Predict</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
