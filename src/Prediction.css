@@ -71,9 +71,17 @@
 .middle-right {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    text-align: left;
+
     font-size: 18px;
+    margin-top: 50px;
+}
+
+.middle-right > div {
+    margin-bottom: 10px;
+    margin-left: 145px;
 }
 
 .bottom-left {
