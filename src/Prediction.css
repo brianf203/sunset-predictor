@@ -1,0 +1,22 @@
+.prediction-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .image-box {
+    background: url('sunset1.avif') center/cover;
+    color: transparent;
+  }  
