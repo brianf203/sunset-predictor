@@ -10,14 +10,11 @@ const Home = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
-
   const handleTextboxClick = () => {
     setShowDropdown(true);
-    console.log("CLICKED");
   };
 
   const handleLocationChange = (e) => {
-    console.log("HELLO");
     setLocation(e.target.value);
     setShowDropdown(true);
   };
@@ -26,7 +23,6 @@ const Home = () => {
     console.log('Predict sunset for:', location);
     navigate('/prediction', { state: { location }, replace: true });
   };
-  
 
   useEffect(() => {
     const fetchAddresses = async () => {
@@ -43,10 +39,10 @@ const Home = () => {
         console.error('Error fetching suggested addresses:', error);
       }
     };
-
     if (location.trim() !== '') {
       fetchAddresses();
-    } else {
+    }
+    else {
       setSuggestedAddresses([]);
     }
   }, [location]);
@@ -55,7 +51,6 @@ const Home = () => {
     setLocation(address.description);
     setSuggestedAddresses([]);
     setShowDropdown(false);
-
   };
 
   const handleClickOutside = (event) => {

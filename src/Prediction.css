@@ -20,10 +20,10 @@
 .top-left {
     font-size: 25px;
     display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
 }
 
 .top-center {
@@ -33,7 +33,8 @@
     justify-content: center;
     font-size: 40px;
     margin-top: 10%;
-    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    white-space: nowrap;
+    /* Prevents text from wrapping to the next line */
 }
 
 .title {
@@ -48,10 +49,10 @@
 .top-right {
     font-size: 25px;
     display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
 }
 
 .middle-left {
