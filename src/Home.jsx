@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './Home.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [location, setLocation] = useState('');
   const [suggestedAddresses, setSuggestedAddresses] = useState([]);
   const suggestionsRef = useRef(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+
 
   const handleTextboxClick = () => {
     setShowDropdown(true);
@@ -22,7 +24,9 @@ const Home = () => {
 
   const handlePredictClick = () => {
     console.log('Predict sunset for:', location);
+    navigate('/prediction', { state: { location }, replace: true });
   };
+  
 
   useEffect(() => {
     const fetchAddresses = async () => {
@@ -51,6 +55,7 @@ const Home = () => {
     setLocation(address.description);
     setSuggestedAddresses([]);
     setShowDropdown(false);
+
   };
 
   const handleClickOutside = (event) => {
