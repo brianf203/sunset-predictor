@@ -6,6 +6,7 @@ import apiKeys from './Keys';
 
 const Home = () => {
   const [location, setLocation] = useState('');
+  const [placeid, setPlaceid] = useState('');
   const [suggestedAddresses, setSuggestedAddresses] = useState([]);
   const suggestionsRef = useRef(null);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -23,7 +24,7 @@ const Home = () => {
 
   const handlePredictClick = () => {
     console.log('Predict sunset for:', location);
-    navigate('/prediction', { state: { location }, replace: true });
+    navigate('/prediction', { state: { location, placeid }, replace: true });
   };
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const Home = () => {
           },
         });
         console.log('API Response:', response.data);
+        setPlaceid(response.data.predictions[0].place_id);
         setSuggestedAddresses(response.data.predictions.slice(0, 5));
       } catch (error) {
         console.error('Error fetching suggested addresses:', error);
@@ -70,7 +72,7 @@ const Home = () => {
 
   return (
     <div className="app-container">
-      <h1 className="title">Sunset Predictor</h1>
+      <div className="title">Sunset Predictor</div>
       <div className="text-container">
         <label htmlFor="location">Enter Location:</label>
       </div>

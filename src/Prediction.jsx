@@ -11,8 +11,12 @@ import { getSunsetImage } from './Sunset';
 
 const Prediction = () => {
     const location = useLocation().state?.location;
+    const placeid = useLocation().state?.placeid;
+    console.log(location);
+    console.log(placeid);
     const city = location.split(', ')[1];
     const weatherApiKey = apiKeys.weatherApiKey;
+    const locationApiKey = apiKeys.locationApiKey;
     const url = `http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${city}&aqi=yes`;
 
     const [sunset, setSunset] = useState('');
@@ -49,6 +53,17 @@ const Prediction = () => {
         return '';
     };
 
+    const url0 = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeid}&key=${locationApiKey}`
+    console.log(url0);
+    useEffect(() => {
+        fetch(url0)
+            .then((response0) => response0.json())
+            .then((data0) => {
+                setLat(data0.results[0].geometry.location.lat)
+                setLon(data0.results[0].geometry.location.lng)
+            })
+    }, [url0]);
+
     useEffect(() => {
         fetch(url)
             .then((response) => response.json())
@@ -58,8 +73,6 @@ const Prediction = () => {
                 setHumidity(parseInt(data.current.humidity, 10));
                 setPressure(parseFloat(data.current.pressure_in));
                 setWind(parseInt(data.current.wind_mph, 10));
-                setLat(data.location.lat);
-                setLon(data.location.lon);
             })
             .catch((error) => console.error('Error:', error));
     }, [url]);
@@ -199,7 +212,7 @@ const Prediction = () => {
                 </div>
             </div>
             <div className="box bottom-left"></div>
-            <div className="box bottom-center">Sunset Rating: {cloudScore + airScore + windScore + humScore + presScore}%</div>
+            <div className="box bottom-center">Sunset Rating: {Math.ceil((cloudScore + airScore + windScore + humScore + presScore) * 10) / 10}%</div>
             <div className="box bottom-right"></div>
         </div>
     );

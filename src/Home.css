@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&display=swap');
 
 body {
     margin: 0;
@@ -16,18 +18,19 @@ body {
     align-items: center;
     justify-content: center;
     height: 85vh;
-    font-family: 'Shadows Into Light', Arial, serif;
-    font-size: 45px;
 }
 
 .title {
     margin-bottom: 20px;
+    font-family: 'Shadows Into Light', Arial, serif;
+    font-size: 65px;
+    font-weight: 600;
 }
 
 .text-container {
     margin-top: 20px;
-    font-family: 'Nunito', Arial, serif;
-    font-size: 35px;
+    font-family: 'Inter', Arial, serif;
+    font-size: 30px;
 }
 
 .input-container {
@@ -52,7 +55,7 @@ button {
     padding: 8px 16px;
     font-size: 16px;
     cursor: pointer;
-    font-family: 'Nunito', Arial, serif;
+    font-family: 'Inter', Arial, serif;
 }
 
 .suggestions {
@@ -61,10 +64,10 @@ button {
     border: 1px solid #ccc;
     border-top: none;
     font-size: 11.5px;
-    font-family: 'Nunito', Arial, serif;
-    margin-right: 96.5px;
+    font-family: 'Inter', Arial, serif;
+    margin-right: 99.5px;
     position: absolute;
-    margin-top: 500px;
+    margin-top: 471px;
     top: -60px;
 }
 
