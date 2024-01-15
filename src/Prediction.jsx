@@ -88,6 +88,33 @@ const Prediction = () => {
     const goldStart = `${newHours}:${newMinutes}:${sunsetParts[2]}`;
     const goldEnd = `${newHours2}:${newMinutes2}:${sunsetParts[2]}`;
 
+    let cloudScore = 0;
+    if (cloud >= 30 && cloud <= 60) cloudScore = 40;
+    else if (cloud < 30) cloudScore = cloud / 30 * 40;
+    else cloudScore = 100 - cloud;
+
+    let airScore = 0;
+    if (air < 25) airScore = 25;
+    else if (air < 50) airScore = 15;
+    else if (air < 75) airScore = 5;
+    else airScore = 0;
+
+    let windScore = 0;
+    if (wind < 5) windScore = 15;
+    else if (wind < 10) windScore = 8;
+    else if (wind < 15) windScore = 4;
+    else windScore = 0;
+
+    let humScore = 0;
+    if (humidity < 30) humScore = 10;
+    else if (humidity < 50) humScore = 5;
+    else humScore = 0;
+
+    let presScore = 0;
+    if (pressure > 30.2) presScore = 10;
+    else if (pressure >= 29.8) presScore = 5;
+    else presScore = 0;
+
     return (
         <div className="prediction-container">
             <div className="box top-left">Sunset: {sunset}</div>
@@ -153,7 +180,7 @@ const Prediction = () => {
                 </div>
             </div>
             <div className="box bottom-left"></div>
-            <div className="box bottom-center">Sunset Rating: 82%</div>
+            <div className="box bottom-center">Sunset Rating: {cloudScore + airScore + windScore + humScore + presScore}%</div>
             <div className="box bottom-right"></div>
         </div>
     );
