@@ -5,11 +5,15 @@ import good from './good.png';
 import mid from './mid.png';
 import bad from './bad.png';
 import golden from './golden.png';
+import { StrictMode } from 'react';
+import apiKeys from './Keys';
+import { getSunsetImage } from './Sunset';
 
 const Prediction = () => {
     const location = useLocation().state?.location;
     const city = location.split(', ')[1];
-    const url = `http://api.weatherapi.com/v1/current.json?key=9cec45c5a8314b71b8f195617241301&q=${city}&aqi=yes`;
+    const weatherApiKey = apiKeys.weatherApiKey;
+    const url = `http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${city}&aqi=yes`;
 
     const [sunset, setSunset] = useState('');
     const [lat, setLat] = useState('');
@@ -42,7 +46,6 @@ const Prediction = () => {
             else if (value >= 5 && value <= 10) return mid;
             else return bad;
         }
-
         return '';
     };
 
@@ -78,15 +81,19 @@ const Prediction = () => {
     let newHours2 = parseInt(sunsetParts[0]);
 
     if (newMinutes < 0) {
-    newMinutes += 60;
-    newHours -= 1;
+        newMinutes += 60;
+        newHours -= 1;
     }
     if (newMinutes2 > 59) {
-        newMinutes2 -=60;
-        newHours2 +=1;
+        newMinutes2 -= 60;
+        newHours2 += 1;
     }
-    const goldStart = `${newHours}:${newMinutes}:${sunsetParts[2]}`;
-    const goldEnd = `${newHours2}:${newMinutes2}:${sunsetParts[2]}`;
+    let strMin = newMinutes + "";
+    let strMin2 = newMinutes2 + "";
+    if (newMinutes < 10) strMin = "0" + newMinutes;
+    if (newMinutes2 < 10) strMin2 = "0" + newMinutes2;
+    const goldStart = `${newHours}:${strMin}:${sunsetParts[2]}`;
+    const goldEnd = `${newHours2}:${strMin2}:${sunsetParts[2]}`;
 
     let cloudScore = 0;
     if (cloud >= 30 && cloud <= 60) cloudScore = 40;
@@ -124,19 +131,31 @@ const Prediction = () => {
             </div>
             <div className="box top-right">Statistics</div>
             <div className="middle-left">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontSize: '22px', marginTop: '60px' }}>Golden Zone</div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{marginLeft: '1.5px' }}>{goldStart}</span>
-                <span style={{marginRight: '1.5px' }}>{goldEnd}</span>
-            </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontSize: '22px', marginTop: '60px' }}>Golden Zone</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ marginLeft: '1.5px' }}>{goldStart}</span>
+                    <span style={{ marginRight: '1.5px' }}>{goldEnd}</span>
+                </div>
                 <div>
-                    <img src={golden} 
-                    alt="Your Image" 
-                    style={{ width: '100%', height: '150%' }}
+                    <img src={golden}
+                        alt="Your Image"
+                        style={{ width: '100%', height: '150%' }}
                     />
                 </div>
             </div>
-            <div className="box middle-center">Image</div>
+            <div className="box">
+                <img
+                    src={getSunsetImage(cloud)}
+                    alt="Your Image"
+                    style={{
+                        background: `url(${getSunsetImage(cloud)}) center/contain no-repeat`,
+                        color: 'transparent',
+                        width: '75%',
+                        height: '75%',
+                        marginTop: '5px',
+                    }}
+                />
+            </div>
             <div className="middle-right">
                 <div>
                     <img
@@ -147,35 +166,35 @@ const Prediction = () => {
                     Air Quality: {air} AQI
                 </div>
                 <div>
-                    <img 
-                        src={getImagePath(cloud, 'cloud')} 
-                        alt="Cloud Coverage" 
+                    <img
+                        src={getImagePath(cloud, 'cloud')}
+                        alt="Cloud Coverage"
                         style={{ width: '5%', height: 'auto', marginRight: '5px' }}
-                        />
+                    />
                     Cloud Coverage: {cloud}%
                 </div>
                 <div>
-                    <img 
-                        src={getImagePath(humidity, 'humidity')} 
-                        alt="Humidity" 
+                    <img
+                        src={getImagePath(humidity, 'humidity')}
+                        alt="Humidity"
                         style={{ width: '5%', height: 'auto', marginRight: '5px' }}
-                        />
+                    />
                     Humidity: {humidity}%
                 </div>
                 <div>
-                    <img 
-                        src={getImagePath(pressure, 'pressure')} 
-                        alt="Pressure" 
+                    <img
+                        src={getImagePath(pressure, 'pressure')}
+                        alt="Pressure"
                         style={{ width: '5%', height: 'auto', marginRight: '5px' }}
-                        />
+                    />
                     Pressure: {pressure} inHg
                 </div>
                 <div>
-                    <img 
-                        src={getImagePath(wind, 'wind')} 
-                        alt="Wind" 
+                    <img
+                        src={getImagePath(wind, 'wind')}
+                        alt="Wind"
                         style={{ width: '5%', height: 'auto', marginRight: '5px' }}
-                        />
+                    />
                     Wind: {wind} mph
                 </div>
             </div>

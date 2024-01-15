@@ -27,7 +27,7 @@ body {
 .text-container {
     margin-top: 20px;
     font-family: 'Nunito', Arial, serif;
-    font-size: 40px;
+    font-size: 35px;
 }
 
 .input-container {
@@ -64,7 +64,7 @@ button {
     font-family: 'Nunito', Arial, serif;
     margin-right: 96.5px;
     position: absolute;
-    margin-top: 533px;
+    margin-top: 500px;
     top: -60px;
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './Home.css';
 import { Link, useNavigate } from 'react-router-dom';
+import apiKeys from './Keys';
 
 const Home = () => {
   const [location, setLocation] = useState('');
@@ -9,6 +10,7 @@ const Home = () => {
   const suggestionsRef = useRef(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
+  const locationApiKey = apiKeys.locationApiKey;
 
   const handleTextboxClick = () => {
     setShowDropdown(true);
@@ -30,7 +32,7 @@ const Home = () => {
         const response = await axios.get(`/api/maps/api/place/autocomplete/json`, {
           params: {
             input: location,
-            key: 'AIzaSyDouikKeLOyhETHplgUVhcTpHMlcps3jwk',
+            key: locationApiKey,
           },
         });
         console.log('API Response:', response.data);
