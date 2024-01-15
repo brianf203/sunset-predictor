@@ -1,16 +1,14 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import Prediction from './Prediction';
 
-const App = () => {
+function App() {
     return (
-      <Router>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/prediction" component={Prediction} />
-        </Switch>
-      </Router>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/prediction" element={<Prediction />} />
+        </Routes>
     );
-  };
+}
 
 export default App;

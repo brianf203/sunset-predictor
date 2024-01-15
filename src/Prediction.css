@@ -34,7 +34,6 @@
     font-size: 40px;
     margin-top: 10%;
     white-space: nowrap;
-    /* Prevents text from wrapping to the next line */
 }
 
 .title {
@@ -56,6 +55,8 @@
 }
 
 .middle-left {
+    display: flex;
+    flex-direction: column;
     font-size: 18px;
 }
 

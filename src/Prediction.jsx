@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import good from './good.png';
 import mid from './mid.png';
 import bad from './bad.png';
+import golden from './golden.png';
 
 const Prediction = () => {
     const location = useLocation().state?.location;
@@ -70,6 +71,23 @@ const Prediction = () => {
             .catch((error) => console.error('Error:', error));
     }, [url2]);
 
+    const sunsetParts = sunset.split(":");
+    let newMinutes = parseInt(sunsetParts[1]) - 15;
+    let newMinutes2 = parseInt(sunsetParts[1]) + 15;
+    let newHours = parseInt(sunsetParts[0]);
+    let newHours2 = parseInt(sunsetParts[0]);
+
+    if (newMinutes < 0) {
+    newMinutes += 60;
+    newHours -= 1;
+    }
+    if (newMinutes2 > 59) {
+        newMinutes2 -=60;
+        newHours2 +=1;
+    }
+    const goldStart = `${newHours}:${newMinutes}:${sunsetParts[2]}`;
+    const goldEnd = `${newHours2}:${newMinutes2}:${sunsetParts[2]}`;
+
     return (
         <div className="prediction-container">
             <div className="box top-left">Sunset: {sunset}</div>
@@ -78,7 +96,19 @@ const Prediction = () => {
                 <div className="small">{location}</div>
             </div>
             <div className="box top-right">Statistics</div>
-            <div className="box middle-left">GOLDEN/BLUE ZONE</div>
+            <div className="middle-left">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontSize: '22px', marginTop: '60px' }}>Golden Zone</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{marginLeft: '1.5px' }}>{goldStart}</span>
+                <span style={{marginRight: '1.5px' }}>{goldEnd}</span>
+            </div>
+                <div>
+                    <img src={golden} 
+                    alt="Your Image" 
+                    style={{ width: '100%', height: '150%' }}
+                    />
+                </div>
+            </div>
             <div className="box middle-center">Image</div>
             <div className="middle-right">
                 <div>
